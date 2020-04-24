@@ -1,0 +1,25 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment='paginationbar'>
+  <nav aria-label="Page navigation example">
+    <ul class='pagination justify-content-center'>
+      <li th:class="${page.firstPage}?'page-item disabled':'page-item'" style="display:inline">
+        <a class="page-link" th:href='@{${page.url}(page=0,size=${page.size})}'>←先頭</a>
+      </li>
+      <li th:class="${page.hasPreviousPage}? 'page-item' : 'page-item disabled'" style="display:inline">
+        <a class="page-link" th:href='@{${page.url}(page=${page.number-2},size=${page.size})}'>«</a>
+      </li>
+      <li th:each='item : ${page.items}' th:class="${item.current}? 'page-item active' : 'page-item'" style="display:inline">
+        <a class="page-link" th:href='@{${page.url}(page=${item.number-1},size=${page.size})}'>
+          <span th:text='${item.number}'>1</span>
+        </a>
+      </li>
+      <li th:class="${page.hasNextPage}? 'page-item' : 'page-item disabled'" style="display:inline">
+        <a class="page-link" th:href='@{${page.url}(page=${page.number},size=${page.size})}'>»</a>
+      </li>
+      <li th:class="${page.lastPage}? 'page-item disabled' : 'page-item'" style="display:inline">
+        <a class="page-link" th:href='@{${page.url}(page=${page.totalPages - 1},size=${page.size})}'>末尾➝</a>
+      </li>
+    </ul>
+  </nav>
+</div>
+</html>
